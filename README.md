@@ -2,55 +2,40 @@
 
 ## Preassignment
 
-For this class, we will be using the Gurobi mixed-integer programming solver, a few other nonlinear solvers (SCS and ECOS), and some other Julia packages.
+For this class, we will be using the Gurobi mixed-integer programming solver, and JuMP to easily formulate optimization problems and solve them using a variety of solvers. The instructions for installing them are the same as before.
 
 ### Installing Gurobi
+
 Gurobi is commercial software, but they have a very permissive (and free!) academic license. If you have an older version of Gurobi (>= 5.5) on your computer, that should be fine.
 
-1. Go to www.gurobi.com
-2. Create an account, and request an academic license.
-3. Download the installer for Gurobi 6.0
-4. Install Gurobi, accepting default options. Remember where it installed to!
-5. Go back to the website and navigate to the page for your academic license. You'll be given a command with a big code in it, e.g. grbgetkey aaaaa-bbbb
-6. In a terminal, navigate to the ``gurobi600/<operating system>/bin`` folder where ``<operating system>`` is the name of your operating system.  
-7. Copy-and-paste the command from the website into the command prompt---you need to be on campus for this to work!
+- Go to [gurobi.com](http://www.gurobi.com) and sign up for an account
+- Get an academic license from the website (section 2.1 of the quick-start guide)
+- Download and install the Gurobi optimizer (section 3 of the quick-start guide)
+- Activate your academic license (section 4.1 of the quick-start guide)
+- you need to do the activation step while connected to the MIT network. If you are off-campus, you can use the [MIT VPN](https://ist.mit.edu/vpn) to connect to the network and then activate (get in touch if you have trouble with this).
+- Test your license (section 4.6 of the quick-start guide)
 
+### Install the Gurobi and JuMP packages in Julia
 
-### Install the Gurobi interface in Julia
+Installing packages in Julia is easy with the Julia package manager. Just open Julia and enter the following command:
 
-Installing this is easy using the Julia package manager: 
 ```jl
 julia> Pkg.add("Gurobi")
 ```
 
-If you don't have an academic email or cannot get access for Gurobi for another reason, you should be able to follow along with the open source solver GLPK for much of the class. To install, simply do
+If you don't have an academic email or cannot get access for Gurobi for another reason, you should be able to follow along with the open source solver GLPK for much of the class. To install, simply do.
+
 ```jl
 julia> Pkg.add("GLPKMathProgInterface")
 ```
 
-### Install remaining packages
-We will use the following packages:
-- Convex
-- Distributions
-- ECOS
-- JuMP
-- PyPlot
-- SCS
+Also install the JuMP package:
 
-First run ``Pkg.update()`` to update the package database, then install each one with ``Pkg.add("xxx")`` where ``xxx`` is the package name.
-
-### Test the installation
-
-In a blank IJulia notebook, paste the following code into a cell:
-
-```julia
-import Convex
-x = Convex.Variable(Convex.Positive())
-Convex.solve!(Convex.minimize(x))
-Convex.evaluate(x)
+```jl
+julia> Pkg.add("JuMP")
 ```
 
-and run it by pressing shift-enter. The result should be some iteration output from ECOS and then a small value that's very close to zero.
+### Test the installation
 
 How about a simple knapsack problem? In the next cell, enter the following JuMP code and submit all the output to Stellar.
 
